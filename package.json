@@ -1,0 +1,42 @@
+{
+  "name": "windows-battery-manager",
+  "version": "1.0.0",
+  "description": "Windows 배터리 상태 모니터링 앱 (배터리 리포트 분석)",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "postinstall": "node scripts/copy-assets.js",
+    "build": "electron-builder",
+    "build:portable": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-builder": "^24.0.0"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "chart.js": "^4.4.0"
+  },
+  "build": {
+    "appId": "com.windows-battery-manager",
+    "productName": "Windows Battery Manager",
+    "win": {
+      "target": ["nsis", "portable"],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "artifactName": "WindowsBatteryManager-Setup-${version}-${arch}.exe"
+    },
+    "portable": {
+      "artifactName": "WindowsBatteryManager-Portable-${version}-${arch}.exe"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "assets/**/*",
+      "node_modules/**/*"
+    ]
+  }
+}
